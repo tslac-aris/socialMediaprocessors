@@ -2200,21 +2200,23 @@ def facebook_handler(source_folder=str, target_folder=str):
                        f"{valuables['source_dir']}/this_profile's_activity_across_facebook/comments_and_reactions/comments.json"]
     user_id = ""
     user_id_int = ""
+    print(username)
+    print(user_data['screen_name'])
     # iterate over a few things to locate the user_id that'll be embedded with the posts
     while user_id == "" and user_id_int == "":
         for option in user_id_options:
+            print(f"checking {option}")
             if os.path.isfile(option):
                 with open(option, "r") as r:
                     filedata = r.read()
-                    filedata = filedata.split(f":274:{username}")
-                    if len(filedata) > 1:
+                    filedata1 = filedata.split(f":274:{username}")
+                    if len(filedata1) > 1:
                         user_id = filedata[0].split("@[")[-1]
                         user_id_int = int(user_id)
+                    filedata2 = filedata.split(f":274:{user_data['screen_name']}")
                     if user_id == "":
-                        filedata = r.read()
-                        filedata = filedata.split(f":274:{user_data['screen_name']}")
-                        if len(filedata) > 1:
-                            user_id = filedata[0].split("@[")[-1]
+                        if len(filedata2) > 1:
+                            user_id = filedata2[0].split("@[")[-1]
                             user_id_int = int(user_id)
         # if can't find userid in posts check messages
         if user_id == "":
