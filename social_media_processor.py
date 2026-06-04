@@ -2211,7 +2211,7 @@ def facebook_handler(source_folder=str, target_folder=str):
                     filedata = r.read()
                     filedata1 = filedata.split(f":274:{username}")
                     if len(filedata1) > 1:
-                        user_id = filedata[0].split("@[")[-1]
+                        user_id = filedata1[0].split("@[")[-1]
                         user_id_int = int(user_id)
                     filedata2 = filedata.split(f":274:{user_data['screen_name']}")
                     if user_id == "":
